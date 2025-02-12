@@ -6,205 +6,55 @@
     <title>حبيب للتسهيل 🤙</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #e3f2fd;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .header {
-            color: #2ba9d6;
-            text-align: center;
-            padding: 20px;
-            font-size: 2em;
-            font-weight: bold;
-        }
-
-        .section {
-            background-color: #2ba9d6;
-            border: 7px solid hsl(270, 100%, 2%);
-            padding: 20px;
-            margin: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .section img {
-            width: 80px;
-            height: 80px;
-            margin-right: 50px;
-            transition: transform 0.3s ease;
-        }
-
-        .section img:hover {
-            transform: scale(1.1);
-        }
-
-        .section a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.5em;
-            transition: color 0.3s ease;
-        }
-
-        .section a:hover {
-            color: #ffcc00;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #2ba9d6;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            background-color: #1c7aa9;
-        }
-
-        /* الوضع الداكن */
-        body.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        body.dark-mode .header {
-            color: #ffffff;
-        }
-
-        body.dark-mode .section {
-            background-color: #1e1e1e;
-            border-color: #333;
-        }
-
-        body.dark-mode .section a {
-            color: #ffffff;
-        }
-
-        body.dark-mode .section a:hover {
-            color: #ffcc00;
-        }
-
-        body.dark-mode .theme-toggle {
-            background-color: #1e1e1e;
-        }
-
-        body.dark-mode .theme-toggle:hover {
-            background-color: #333;
-        }
-
-        /* التعديلات للأجهزة المحمولة */
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #e3f2fd; transition: background-color 0.3s ease, color 0.3s ease; }
+        .header { color: #2ba9d6; text-align: center; padding: 20px; font-size: 2em; font-weight: bold; }
+        .section { background-color: #2ba9d6; border: 7px solid hsl(270, 100%, 2%); padding: 20px; margin: 15px; display: flex; align-items: center; justify-content: flex-start; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, border-color 0.3s ease; }
+        .section img { width: 80px; height: 80px; margin-right: 50px; transition: transform 0.3s ease; }
+        .section img:hover { transform: scale(1.1); }
+        .section a { text-decoration: none; color: white; font-size: 1.5em; transition: color 0.3s ease; }
+        .section a:hover { color: #ffcc00; }
+        .theme-toggle { position: fixed; top: 20px; right: 20px; background-color: #2ba9d6; color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-size: 1em; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); display: flex; align-items: center; gap: 10px; transition: background-color 0.3s ease, transform 0.2s ease; }
+        .theme-toggle:hover { background-color: #1c7aa9; transform: scale(1.05); }
+        .open-selected { position: fixed; top: 70px; right: 20px; background-color: #4CAF50; color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-size: 1em; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); display: flex; align-items: center; gap: 10px; transition: background-color 0.3s ease, transform 0.2s ease; }
+        .open-selected:hover { background-color: #45a049; transform: scale(1.05); }
+        .checkbox { margin-left: 20px; cursor: pointer; width: 20px; height: 20px; accent-color: #4CAF50; }
+        body.dark-mode { background-color: #121212; color: #ffffff; }
+        body.dark-mode .header { color: #ffffff; }
+        body.dark-mode .section { background-color: #1e1e1e; border-color: #333; }
+        body.dark-mode .section a { color: #ffffff; }
+        body.dark-mode .section a:hover { color: #ffcc00; }
+        body.dark-mode .theme-toggle { background-color: #1e1e1e; }
+        body.dark-mode .theme-toggle:hover { background-color: #333; }
+        body.dark-mode .open-selected { background-color: #2e7d32; }
+        body.dark-mode .open-selected:hover { background-color: #1b5e20; }
         @media (max-width: 768px) {
-            .header {
-                font-size: 1.5em; /* تصغير حجم العنوان */
-                padding: 15px;
-            }
-
-            .section {
-                flex-direction: column; /* تغيير اتجاه العناصر إلى عمودي */
-                align-items: center;
-                text-align: center;
-                padding: 15px;
-                margin: 10px;
-            }
-
-            .section img {
-                width: 60px; /* تصغير حجم الصور */
-                height: 60px;
-                margin-right: 0; /* إزالة المسافة بين الصورة والنص */
-                margin-bottom: 10px; /* إضافة مسافة أسفل الصورة */
-            }
-
-            .section a {
-                font-size: 1.2em; /* تصغير حجم الخط */
-            }
-
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 8px 16px;
-                font-size: 0.9em;
-            }
+            .header { font-size: 1.5em; padding: 15px; }
+            .section { flex-direction: column; align-items: center; text-align: center; padding: 15px; margin: 10px; }
+            .section img { width: 60px; height: 60px; margin-right: 0; margin-bottom: 10px; }
+            .section a { font-size: 1.2em; }
+            .theme-toggle { top: 10px; right: 10px; padding: 10px 20px; font-size: 0.9em; }
+            .open-selected { top: 60px; right: 10px; padding: 10px 20px; font-size: 0.9em; }
         }
     </style>
 </head>
 <body>
-
-    <!-- زر تبديل الوضع -->
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <i id="theme-icon" class="fas fa-sun"></i>
-        <span id="theme-text">الوضع الداكن</span>
-    </button>
-
-    <!-- العنوان -->
-    <div class="header">
-        حبيب للتسهيل 🤙
-    </div>
-
-    <!-- قسم فيسبوك -->
-    <div class="section">
-        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook Icon">
-        <a href="https://www.facebook.com/?locale=fr_FR" target="_blank">
-            <h1>Facebook</h1>
-        </a>
-    </div>
-
-    <!-- قسم إنستغرام -->
-    <div class="section">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Icon">
-        <a href="https://www.instagram.com/" target="_blank">
-            <h1>Instagram</h1>
-        </a>
-    </div>
-
-    <!-- قسم يوتيوب -->
-    <div class="section">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube Icon">
-        <a href="https://www.youtube.com/" target="_blank">
-            <h1>YouTube</h1>
-        </a>
-    </div>
-
-    <!-- قسم X (Twitter) -->
-    <div class="section">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X Icon">
-        <a href="https://twitter.com/" target="_blank">
-            <h1>X</h1>
-        </a>
-    </div>
-
-    <!-- قسم Pinterest -->
-    <div class="section">
-        <img src="https://cdn-icons-png.flaticon.com/512/2175/2175205.png" alt="Pinterest Icon">
-        <a href="https://www.pinterest.com/" target="_blank">
-            <h1>Pinterest</h1>
-        </a>
-    </div>
-
+    <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-sun"></i><span id="theme-text">الوضع الداكن</span></button>
+    <button class="open-selected" onclick="openSelectedLinks()"><i class="fas fa-external-link-alt"></i><span>فتح الروابط المحددة</span></button>
+    <div class="header">حبيب للتسهيل 🤙</div>
+    <div class="section"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook Icon"><a href="https://www.facebook.com/?locale=fr_FR" target="_blank"><h1>Facebook</h1></a><input type="checkbox" class="checkbox"></div>
+    <div class="section"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Icon"><a href="https://www.instagram.com/" target="_blank"><h1>Instagram</h1></a><input type="checkbox" class="checkbox"></div>
+    <div class="section"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube Icon"><a href="https://www.youtube.com/" target="_blank"><h1>YouTube</h1></a><input type="checkbox" class="checkbox"></div>
+    <div class="section"><img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X Icon"><a href="https://twitter.com/" target="_blank"><h1>X</h1></a><input type="checkbox" class="checkbox"></div>
+    <div class="section"><img src="https://cdn-icons-png.flaticon.com/512/2175/2175205.png" alt="Pinterest Icon"><a href="https://www.pinterest.com/" target="_blank"><h1>Pinterest</h1></a><input type="checkbox" class="checkbox"></div>
+    <div class="section"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok Icon"><a href="https://www.tiktok.com/" target="_blank"><h1>TikTok</h1></a><input type="checkbox" class="checkbox"></div>
+    <!-- قسم Steam الجديد -->
+    <div class="section"><img src="https://cdn-icons-png.flaticon.com/512/15466/15466225.png" alt="Steam Icon"><a href="https://store.steampowered.com/" target="_blank"><h1>Steam</h1></a><input type="checkbox" class="checkbox"></div>
     <script>
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById("theme-icon");
             const themeText = document.getElementById("theme-text");
-
             body.classList.toggle("dark-mode");
-
             if (body.classList.contains("dark-mode")) {
                 themeIcon.classList.remove("fa-sun");
                 themeIcon.classList.add("fa-moon");
@@ -214,18 +64,11 @@
                 themeIcon.classList.add("fa-sun");
                 themeText.textContent = "الوضع الداكن";
             }
-
-            if (body.classList.contains("dark-mode")) {
-                localStorage.setItem("theme", "dark");
-            } else {
-                localStorage.setItem("theme", "light");
-            }
+            localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light");
         }
-
         const savedTheme = localStorage.getItem("theme");
         const themeIcon = document.getElementById("theme-icon");
         const themeText = document.getElementById("theme-text");
-
         if (savedTheme === "dark") {
             document.body.classList.add("dark-mode");
             themeIcon.classList.remove("fa-sun");
@@ -236,7 +79,15 @@
             themeIcon.classList.add("fa-sun");
             themeText.textContent = "الوضع الداكن";
         }
+        function openSelectedLinks() {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    const link = document.querySelectorAll('.section a')[index].href;
+                    window.open(link, '_blank');
+                }
+            });
+        }
     </script>
-
 </body>
 </html>
