@@ -1,47 +1,214 @@
 <!DOCTYPE html>
-
+<html lang="ar">
 <head>
-    <title>حبيب للتسهيل 🤙 </title>
-    <style> 
-body { margin: 0; }
-.face {background-color:#2ba9d6;
-border: 7px hsl(270, 100%, 2%) solid; }
-.bombaclef {padding: 5px; 
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding-right: 700px;} 
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حبيب للتسهيل 🤙</title>
+    <!-- إضافة Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd; /* لون أزرق فاتح مريح للعين */
+            transition: background-color 0.3s ease, color 0.3s ease; /* تأثير انتقال سلس */
+        }
+
+        .header {
+            color: #2ba9d6; /* لون النص الأزرق */
+            text-align: center; /* توسيط النص */
+            padding: 20px; /* تباعد داخلي */
+            font-size: 2em; /* حجم الخط */
+            font-weight: bold; /* سمك الخط */
+        }
+
+        .section {
+            background-color: #2ba9d6; /* لون خلفية الأقسام */
+            border: 7px solid hsl(270, 100%, 2%);
+            padding: 20px;
+            margin: 15px; /* تباعد خارجي */
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-radius: 10px; /* زوايا مدورة */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل */
+            transition: background-color 0.3s ease, border-color 0.3s ease; /* تأثير انتقال سلس */
+        }
+
+        .section img {
+            width: 80px; /* تكبير الصور */
+            height: 80px; /* تكبير الصور */
+            margin-right: 50px; /* زيادة المسافة بين الصورة والرابط */
+            transition: transform 0.3s ease; /* تأثير تكبير الصورة */
+        }
+
+        .section img:hover {
+            transform: scale(1.1); /* تكبير الصورة عند التمرير */
+        }
+
+        .section a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5em;
+            transition: color 0.3s ease; /* تأثير تغيير اللون */
+        }
+
+        .section a:hover {
+            color: #ffcc00; /* تغيير اللون عند التمرير */
+        }
+
+        /* زر تبديل الوضع */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #2ba9d6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px; /* مسافة بين الأيقونة والنص */
+            transition: background-color 0.3s ease; /* تأثير انتقال سلس */
+        }
+
+        .theme-toggle:hover {
+            background-color: #1c7aa9;
+        }
+
+        /* الوضع الداكن */
+        body.dark-mode {
+            background-color: #121212; /* خلفية داكنة */
+            color: #ffffff; /* نص أبيض */
+        }
+
+        body.dark-mode .header {
+            color: #ffffff; /* نص العنوان أبيض في الوضع الداكن */
+        }
+
+        body.dark-mode .section {
+            background-color: #1e1e1e; /* خلفية داكنة للأقسام */
+            border-color: #333; /* لون الحدود داكن */
+        }
+
+        body.dark-mode .section a {
+            color: #ffffff; /* نص الروابط أبيض في الوضع الداكن */
+        }
+
+        body.dark-mode .section a:hover {
+            color: #ffcc00; /* لون الرابط عند التمرير في الوضع الداكن (أصفر) */
+        }
+
+        body.dark-mode .theme-toggle {
+            background-color: #1e1e1e; /* لون زر الوضع الداكن */
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background-color: #333; /* لون زر الوضع الداكن عند التمرير */
+        }
+    </style>
 </head>
 <body>
- <div class="face bombaclef">    
-<img src="images/face.png"/>
-<a   href="https://www.facebook.com/?locale=fr_FR"> <h1>  Facebool </ha1></a>
- </div>
-</body>
-<head>
 
-<style>
-body {margin: 0;}
-.tito { background-color: #2ba9d6; border: 7px purple solid;}
-.bibmclef { padding: 5px;
-display: flex; 
-justify-content: space-between;
-align-items: center;
-padding-right: 500px;}
-</style>
-</head>
-<body>
-<div class="face bombaclef"> 
-<img src="images/insta.jfif"/>
-<a href="https://www.instagram.com/"> <h1>insta </h1> </a>
-</div>
+    <!-- زر تبديل الوضع -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i id="theme-icon" class="fas fa-sun"></i> <!-- أيقونة الشمس -->
+        <span id="theme-text">الوضع الداكن</span> <!-- نص الزر -->
+    </button>
+
+    <!-- العنوان -->
+    <div class="header">
+        حبيب للتسهيل 🤙
+    </div>
+
+    <!-- قسم فيسبوك -->
+    <div class="section">
+        <img src="images/face.png" alt="Facebook Icon">
+        <a href="https://www.facebook.com/?locale=fr_FR" target="_blank">
+            <h1>Facebook</h1>
+        </a>
+    </div>
+
+    <!-- قسم إنستغرام -->
+    <div class="section">
+        <img src="images/insta.jfif" alt="Instagram Icon">
+        <a href="https://www.instagram.com/" target="_blank">
+            <h1>Instagram</h1>
+        </a>
+    </div>
+
+    <!-- قسم يوتيوب -->
+    <div class="section">
+        <img src="images/download.png" alt="YouTube Icon">
+        <a href="https://www.youtube.com/" target="_blank">
+            <h1>YouTube</h1>
+        </a>
+    </div>
+
+    <!-- قسم X (Twitter) -->
+    <div class="section">
+        <img src="images/x.png" alt="X Icon">
+        <a href="https://twitter.com/" target="_blank">
+            <h1>X</h1>
+        </a>
+    </div>
+
+    <!-- القسم الخامس المضاف -->
+    <div class="section">
+        <img src="images/pin.png" alt="Pinterest Icon">
+        <a href="https://www.pinterest.com/" target="_blank">
+            <h1>Pinterest</h1>
+        </a>
+    </div>
+
+    <script>
+        // دالة تبديل الوضع
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById("theme-icon");
+            const themeText = document.getElementById("theme-text");
+
+            body.classList.toggle("dark-mode");
+
+            // تغيير الأيقونة والنص
+            if (body.classList.contains("dark-mode")) {
+                themeIcon.classList.remove("fa-sun");
+                themeIcon.classList.add("fa-moon");
+                themeText.textContent = "الوضع الفاتح";
+            } else {
+                themeIcon.classList.remove("fa-moon");
+                themeIcon.classList.add("fa-sun");
+                themeText.textContent = "الوضع الداكن";
+            }
+
+            // حفظ الوضع في localStorage
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+        }
+
+        // تحميل الوضع المحفوظ
+        const savedTheme = localStorage.getItem("theme");
+        const themeIcon = document.getElementById("theme-icon");
+        const themeText = document.getElementById("theme-text");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            themeIcon.classList.remove("fa-sun");
+            themeIcon.classList.add("fa-moon");
+            themeText.textContent = "الوضع الفاتح";
+        } else {
+            themeIcon.classList.remove("fa-moon");
+            themeIcon.classList.add("fa-sun");
+            themeText.textContent = "الوضع الداكن";
+        }
+    </script>
 
 </body>
-<body>
-    <div class="face bombaclef"> 
-        <img src="images/download.png"/>
-        <a href="https://www.youtube.com/"> <h1>youtube</h1> </a>
-        </div>
-
-</body>
+</html>
