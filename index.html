@@ -50,6 +50,7 @@
         gap: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         transition: transform 0.3s ease;
+        position: relative;
     }
     .card:hover {
         transform: translateY(-5px);
@@ -72,6 +73,9 @@
         width: 20px;
         height: 20px;
         accent-color: var(--success-color);
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
     }
     .button-container {
         position: fixed;
@@ -111,6 +115,14 @@
     body.dark-mode .open-selected {
         background-color: #2e7d32;
     }
+    .card-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
 </style>
 </head>
 <body>
@@ -123,52 +135,60 @@
 <div class="header">حبيب للتسهيل 🤙</div>
 
 <div class="container">
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
         <a href="https://www.facebook.com/?locale=fr_FR" target="_blank">Facebook</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://www.facebook.com/?locale=fr_FR" target="_blank" class="card-link"></a>
     </div>
 
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
         <a href="https://www.instagram.com/" target="_blank">Instagram</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://www.instagram.com/" target="_blank" class="card-link"></a>
     </div>
 
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
         <a href="https://www.youtube.com/" target="_blank">YouTube</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://www.youtube.com/" target="_blank" class="card-link"></a>
     </div>
 
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X">
         <a href="https://twitter.com/" target="_blank">X</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://twitter.com/" target="_blank" class="card-link"></a>
     </div>
 
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://cdn-icons-png.flaticon.com/512/2175/2175205.png" alt="Pinterest">
         <a href="https://www.pinterest.com/" target="_blank">Pinterest</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://www.pinterest.com/" target="_blank" class="card-link"></a>
     </div>
 
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
         <a href="https://www.tiktok.com/" target="_blank">TikTok</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://www.tiktok.com/" target="_blank" class="card-link"></a>
     </div>
 
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://cdn-icons-png.flaticon.com/512/15466/15466225.png" alt="Steam">
         <a href="https://store.steampowered.com/" target="_blank">Steam</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://store.steampowered.com/" target="_blank" class="card-link"></a>
     </div>
 
-    <div class="card" onclick="toggleCheckbox(this)">
+    <div class="card">
         <img src="https://www.spacehey.com/favicon.ico" alt="SpaceHey">
         <a href="https://spacehey.com/" target="_blank">SpaceHey</a>
         <input type="checkbox" class="checkbox">
+        <a href="https://spacehey.com/" target="_blank" class="card-link"></a>
     </div>
 </div>
 
@@ -205,26 +225,24 @@ function openSelectedLinks(){
         alert("الرجاء تحديد روابط لفتحها");
     } else {
         checked.forEach(box => {
-            const link = box.previousElementSibling.href;
+            const link = box.parentElement.querySelector('.card-link').href;
             window.open(link, '_blank');
         });
     }
 }
 
-function toggleCheckbox(card){
-    const checkbox = card.querySelector('.checkbox');
-    checkbox.checked = !checkbox.checked;
-    event.stopPropagation();
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
+    
+    // منع فتح الرابط عند النقر على المربع
     document.querySelectorAll('.checkbox').forEach(cb => {
-        cb.addEventListener('click', e => e.stopPropagation());
+        cb.addEventListener('click', e => {
+            e.stopPropagation();
+            // لا تفعل أي شيء آخر، فقط امنع انتشار الحدث
+        });
     });
 });
 </script>
 
 </body>
 </html>
-
