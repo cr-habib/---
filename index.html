@@ -7,27 +7,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
     :root {
-        --primary-color: #2ba9d6;
-        --secondary-color: #ffcc00;
+        --primary-color: #4285F4; /* أزرق هادئ */
+        --secondary-color: #EA4335; /* أحمر هادئ */
         --dark-color: #121212;
-        --light-color: #f9f9f9;
-        --success-color: #4CAF50;
-        --text-color: #333;
-        --text-light: #fff;
+        --light-color: #f8f9fa;
+        --success-color: #34A853; /* أخضر هادئ */
+        --text-color: #2d3748;
+        --text-light: #ffffff;
     }
     body {
         margin: 0;
-        font-family: 'Segoe UI', sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--light-color);
         color: var(--text-color);
         transition: all 0.3s ease;
     }
     .header {
         text-align: center;
-        font-size: 2em;
+        font-size: 2.2em;
         font-weight: bold;
         color: var(--primary-color);
-        margin: 20px 0;
+        margin: 25px 0;
+        padding: 0 15px;
     }
     .container {
         max-width: 1000px;
@@ -35,47 +36,64 @@
         padding: 0 15px;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 15px;
+        gap: 18px;
     }
     .card {
-        background: var(--primary-color);
         color: var(--text-light);
-        padding: 20px;
-        border-radius: 15px;
+        padding: 22px;
+        border-radius: 16px;
         text-align: center;
         cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transition: transform 0.3s ease;
+        gap: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
         position: relative;
+        border: 1px solid rgba(255,255,255,0.2);
     }
+    
+    /* ألوان بطاقات هادئة ومتناسقة */
+    .card:nth-child(1) { background: #4285F4; } /* فيسبوك - أزرق غوغل */
+    .card:nth-child(2) { background: linear-gradient(135deg, #FF9A8B 0%, #F6416C 100%); } /* إنستجرام - جرادينت وردي ناعم */
+    .card:nth-child(3) { background: #EA4335; } /* يوتيوب - أحمر هادئ */
+    .card:nth-child(4) { background: #1DA1F2; } /* تويتر - أزرق سماوي */
+    .card:nth-child(5) { background: #E60023; } /* بنترست - أحمر وردي */
+    .card:nth-child(6) { background: linear-gradient(135deg, #000000 0%, #434343 100%); } /* تيك توك - أسود أنيق */
+    .card:nth-child(7) { background: #2b475e; } /* ستيم - أزرق داكن */
+    
     .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
     .card img {
-        width: 60px;
-        height: 60px;
+        width: 64px;
+        height: 64px;
         object-fit: contain;
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
+        filter: brightness(0.95) contrast(1.05);
     }
+    .card:nth-child(1) img { filter: brightness(0.9) contrast(1.1); }
+    .card:nth-child(3) img { filter: brightness(0.92) contrast(1.08); }
     .card img:hover {
-        transform: scale(1.1);
+        transform: scale(1.12);
     }
     .card a {
         color: var(--text-light);
-        font-size: 1.2em;
+        font-size: 1.25em;
+        font-weight: 500;
         text-decoration: none;
+        letter-spacing: 0.5px;
     }
     .checkbox {
-        width: 20px;
-        height: 20px;
+        width: 21px;
+        height: 21px;
         accent-color: var(--success-color);
         cursor: pointer;
         position: relative;
         z-index: 2;
+        margin-top: 5px;
     }
     .button-container {
         position: fixed;
@@ -83,38 +101,56 @@
         left: 20px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
         z-index: 100;
     }
     .theme-toggle, .open-selected {
         background: var(--primary-color);
         color: var(--text-light);
         border: none;
-        padding: 10px 15px;
-        border-radius: 25px;
+        padding: 11px 17px;
+        border-radius: 28px;
         cursor: pointer;
-        font-size: 0.9em;
+        font-size: 0.95em;
         display: flex;
         align-items: center;
-        gap: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        gap: 9px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    .theme-toggle:hover, .open-selected:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
     .open-selected {
         background: var(--success-color);
     }
+    
+    /* تحسينات الوضع الداكن */
     body.dark-mode {
-        background-color: var(--dark-color);
-        color: var(--text-light);
+        background-color: #0a0a0a;
+        color: #f0f0f0;
     }
     body.dark-mode .card {
-        background-color: #2a2a2a;
+        opacity: 0.92;
+        filter: brightness(0.88);
+        border-color: rgba(255,255,255,0.1);
     }
+    body.dark-mode .card:nth-child(1) { background: #3367D6; }
+    body.dark-mode .card:nth-child(2) { background: linear-gradient(135deg, #E88D7A 0%, #D6375F 100%); }
+    body.dark-mode .card:nth-child(3) { background: #D0392B; }
+    body.dark-mode .card:nth-child(4) { background: #1A8CD8; }
+    body.dark-mode .card:nth-child(5) { background: #CC001F; }
+    body.dark-mode .card:nth-child(6) { background: linear-gradient(135deg, #000000 0%, #2D2D2D 100%); }
+    body.dark-mode .card:nth-child(7) { background: #1F3A4D; }
+    
     body.dark-mode .theme-toggle {
-        background-color: #333;
+        background-color: #5a5a5a;
     }
     body.dark-mode .open-selected {
-        background-color: #2e7d32;
+        background-color: #2E8B57;
     }
+    
     .card-link {
         position: absolute;
         top: 0;
@@ -183,13 +219,6 @@
         <input type="checkbox" class="checkbox">
         <a href="https://store.steampowered.com/" target="_blank" class="card-link"></a>
     </div>
-
-    <div class="card">
-        <img src="https://www.spacehey.com/favicon.ico" alt="SpaceHey">
-        <a href="https://spacehey.com/" target="_blank">SpaceHey</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://spacehey.com/" target="_blank" class="card-link"></a>
-    </div>
 </div>
 
 <script>
@@ -234,11 +263,9 @@ function openSelectedLinks(){
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     
-    // منع فتح الرابط عند النقر على المربع
     document.querySelectorAll('.checkbox').forEach(cb => {
         cb.addEventListener('click', e => {
             e.stopPropagation();
-            // لا تفعل أي شيء آخر، فقط امنع انتشار الحدث
         });
     });
 });
