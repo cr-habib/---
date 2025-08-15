@@ -1,60 +1,230 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>حبيب للتسهيل 🤙</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root{--primary-color:#2ba9d6;--secondary-color:#ffcc00;--dark-color:#121212;--light-color:#e3f2fd;--border-color:#270042;--success-color:#4CAF50;--text-color:#333;--text-light:#fff}
-        body{margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:var(--light-color);color:var(--text-color);transition:all 0.3s ease}
-        .header{color:var(--primary-color);text-align:center;padding:25px;font-size:2.5em;font-weight:bold;margin-top:20px;text-shadow:1px 1px 3px rgba(0,0,0,0.1)}
-        .sections-container{max-width:800px;margin:0 auto;padding:0 15px}
-        .section{background-color:var(--primary-color);border:5px solid var(--border-color);padding:15px;margin:15px 0;display:flex;align-items:center;justify-content:space-between;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.3s ease;cursor:pointer}
-        .section:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,0.2)}
-        .section-content{display:flex;align-items:center;flex-grow:1}
-        .section img{width:60px;height:60px;margin-left:20px;transition:transform 0.3s ease;object-fit:contain}
-        .section img:hover{transform:scale(1.1)}
-        .section a{text-decoration:none;color:var(--text-light);font-size:1.4em;transition:color 0.3s ease;flex-grow:1;text-align:right}
-        .section a:hover{color:var(--secondary-color)}
-        .checkbox-container{display:flex;align-items:center;margin-left:15px}
-        .checkbox{cursor:pointer;width:22px;height:22px;accent-color:var(--success-color)}
-        .button-container{position:fixed;top:20px;left:20px;display:flex;flex-direction:column;gap:10px;z-index:100}
-        .theme-toggle,.open-selected{background-color:var(--primary-color);color:var(--text-light);border:none;padding:12px 20px;border-radius:30px;cursor:pointer;font-size:1em;box-shadow:0 4px 8px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.3s ease;min-width:150px}
-        .theme-toggle:hover,.open-selected:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,0.3)}
-        .open-selected{background-color:var(--success-color)}
-        body.dark-mode{background-color:var(--dark-color);color:var(--text-light)}
-        body.dark-mode .header{color:var(--secondary-color);text-shadow:1px 1px 3px rgba(0,0,0,0.3)}
-        body.dark-mode .section{background-color:#2a2a2a;border-color:#444}
-        body.dark-mode .section a{color:var(--text-light)}
-        body.dark-mode .theme-toggle{background-color:#333}
-        body.dark-mode .open-selected{background-color:#2e7d32}
-        @media (max-width:768px){.header{font-size:1.8em;padding:15px;margin-top:60px}.button-container{flex-direction:row;top:10px;left:10px;right:10px;justify-content:center}.theme-toggle,.open-selected{padding:10px 15px;font-size:0.9em;min-width:auto}.section{padding:12px;margin:12px 0}.section img{width:50px;height:50px;margin-left:15px}.section a{font-size:1.2em}}
-        @media (max-width:480px){.section{flex-direction:column;text-align:center}.section-content{width:100%;justify-content:space-between}.section img{margin-left:0;margin-right:15px}.checkbox-container{margin-top:10px;margin-left:0}}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حبيب للتسهيل 🤙</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --primary-color: #2ba9d6;
+        --secondary-color: #ffcc00;
+        --dark-color: #121212;
+        --light-color: #f9f9f9;
+        --success-color: #4CAF50;
+        --text-color: #333;
+        --text-light: #fff;
+    }
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: var(--light-color);
+        color: var(--text-color);
+        transition: all 0.3s ease;
+    }
+    .header {
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin: 20px 0;
+    }
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 0 15px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+    }
+    .card {
+        background: var(--primary-color);
+        color: var(--text-light);
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+    .card img:hover {
+        transform: scale(1.1);
+    }
+    .card a {
+        color: var(--text-light);
+        font-size: 1.2em;
+        text-decoration: none;
+    }
+    .checkbox {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--success-color);
+    }
+    .button-container {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 100;
+    }
+    .theme-toggle, .open-selected {
+        background: var(--primary-color);
+        color: var(--text-light);
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 0.9em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .open-selected {
+        background: var(--success-color);
+    }
+    body.dark-mode {
+        background-color: var(--dark-color);
+        color: var(--text-light);
+    }
+    body.dark-mode .card {
+        background-color: #2a2a2a;
+    }
+    body.dark-mode .theme-toggle {
+        background-color: #333;
+    }
+    body.dark-mode .open-selected {
+        background-color: #2e7d32;
+    }
+</style>
 </head>
 <body>
-    <div class="button-container">
-        <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-sun"></i><span id="theme-text">الوضع الداكن</span></button>
-        <button class="open-selected" onclick="openSelectedLinks()"><i class="fas fa-external-link-alt"></i><span>فتح المحدد</span></button>
+
+<div class="button-container">
+    <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-sun"></i><span id="theme-text">الوضع الداكن</span></button>
+    <button class="open-selected" onclick="openSelectedLinks()"><i class="fas fa-external-link-alt"></i><span>فتح المحدد</span></button>
+</div>
+
+<div class="header">حبيب للتسهيل 🤙</div>
+
+<div class="container">
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
+        <a href="https://www.facebook.com/?locale=fr_FR" target="_blank">Facebook</a>
+        <input type="checkbox" class="checkbox">
     </div>
-    <div class="header">حبيب للتسهيل 🤙</div>
-    <div class="sections-container">
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"><a href="https://www.facebook.com/?locale=fr_FR" target="_blank"><h1>Facebook</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"><a href="https://www.instagram.com/" target="_blank"><h1>Instagram</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"><a href="https://www.youtube.com/" target="_blank"><h1>YouTube</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X"><a href="https://twitter.com/" target="_blank"><h1>X</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://cdn-icons-png.flaticon.com/512/2175/2175205.png" alt="Pinterest"><a href="https://www.pinterest.com/" target="_blank"><h1>Pinterest</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"><a href="https://www.tiktok.com/" target="_blank"><h1>TikTok</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://cdn-icons-png.flaticon.com/512/15466/15466225.png" alt="Steam"><a href="https://store.steampowered.com/" target="_blank"><h1>Steam</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
-        <div class="section" onclick="toggleCheckbox(this)"><div class="section-content"><img src="https://www.spacehey.com/favicon.ico" alt="SpaceHey"><a href="https://spacehey.com/" target="_blank"><h1>SpaceHey</h1></a></div><div class="checkbox-container"><input type="checkbox" class="checkbox"></div></div>
+
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+        <input type="checkbox" class="checkbox">
     </div>
-    <script>
-        function toggleTheme(){const e=document.body,t=document.getElementById("theme-icon"),n=document.getElementById("theme-text");e.classList.toggle("dark-mode"),e.classList.contains("dark-mode")?(t.classList.replace("fa-sun","fa-moon"),n.textContent="الوضع الفاتح"):(t.classList.replace("fa-moon","fa-sun"),n.textContent="الوضع الداكن"),localStorage.setItem("theme",e.classList.contains("dark-mode")?"dark":"light")}
-        function initializeTheme(){const e=localStorage.getItem("theme"),t=document.getElementById("theme-icon"),n=document.getElementById("theme-text");"dark"===e?(document.body.classList.add("dark-mode"),t.classList.replace("fa-sun","fa-moon"),n.textContent="الوضع الفاتح"):(t.classList.replace("fa-moon","fa-sun"),n.textContent="الوضع الداكن")}
-        function openSelectedLinks(){const e=document.querySelectorAll('.checkbox:checked');0===e.length?alert("الرجاء تحديد روابط لفتحها"):e.forEach(e=>{const t=e.closest('.section').querySelector('a').href;window.open(t,'_blank')})}
-        function toggleCheckbox(e){const t=e.querySelector('.checkbox');t.checked=!t.checked,event.stopPropagation()}
-        document.addEventListener('DOMContentLoaded',function(){initializeTheme(),document.querySelectorAll('.checkbox').forEach(e=>{e.addEventListener('click',function(e){e.stopPropagation()})})});
-    </script>
+
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+        <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+        <input type="checkbox" class="checkbox">
+    </div>
+
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X">
+        <a href="https://twitter.com/" target="_blank">X</a>
+        <input type="checkbox" class="checkbox">
+    </div>
+
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/2175/2175205.png" alt="Pinterest">
+        <a href="https://www.pinterest.com/" target="_blank">Pinterest</a>
+        <input type="checkbox" class="checkbox">
+    </div>
+
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+        <a href="https://www.tiktok.com/" target="_blank">TikTok</a>
+        <input type="checkbox" class="checkbox">
+    </div>
+
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/15466/15466225.png" alt="Steam">
+        <a href="https://store.steampowered.com/" target="_blank">Steam</a>
+        <input type="checkbox" class="checkbox">
+    </div>
+
+    <div class="card" onclick="toggleCheckbox(this)">
+        <img src="https://www.spacehey.com/favicon.ico" alt="SpaceHey">
+        <a href="https://spacehey.com/" target="_blank">SpaceHey</a>
+        <input type="checkbox" class="checkbox">
+    </div>
+</div>
+
+<script>
+function toggleTheme(){
+    const body = document.body;
+    const icon = document.getElementById("theme-icon");
+    const text = document.getElementById("theme-text");
+    body.classList.toggle("dark-mode");
+    if(body.classList.contains("dark-mode")){
+        icon.classList.replace("fa-sun","fa-moon");
+        text.textContent = "الوضع الفاتح";
+    } else {
+        icon.classList.replace("fa-moon","fa-sun");
+        text.textContent = "الوضع الداكن";
+    }
+    localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light");
+}
+
+function initializeTheme(){
+    const theme = localStorage.getItem("theme");
+    const icon = document.getElementById("theme-icon");
+    const text = document.getElementById("theme-text");
+    if(theme === "dark"){
+        document.body.classList.add("dark-mode");
+        icon.classList.replace("fa-sun","fa-moon");
+        text.textContent = "الوضع الفاتح";
+    }
+}
+
+function openSelectedLinks(){
+    const checked = document.querySelectorAll('.checkbox:checked');
+    if(checked.length === 0){
+        alert("الرجاء تحديد روابط لفتحها");
+    } else {
+        checked.forEach(box => {
+            const link = box.previousElementSibling.href;
+            window.open(link, '_blank');
+        });
+    }
+}
+
+function toggleCheckbox(card){
+    const checkbox = card.querySelector('.checkbox');
+    checkbox.checked = !checkbox.checked;
+    event.stopPropagation();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme();
+    document.querySelectorAll('.checkbox').forEach(cb => {
+        cb.addEventListener('click', e => e.stopPropagation());
+    });
+});
+</script>
+
 </body>
 </html>
+
