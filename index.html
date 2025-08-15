@@ -1,275 +1,303 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>حبيب للتسهيل 🤙</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-    :root {
-        --primary-color: #4285F4; /* أزرق هادئ */
-        --secondary-color: #EA4335; /* أحمر هادئ */
-        --dark-color: #121212;
-        --light-color: #f8f9fa;
-        --success-color: #34A853; /* أخضر هادئ */
-        --text-color: #2d3748;
-        --text-light: #ffffff;
-    }
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--light-color);
-        color: var(--text-color);
-        transition: all 0.3s ease;
-    }
-    .header {
-        text-align: center;
-        font-size: 2.2em;
-        font-weight: bold;
-        color: var(--primary-color);
-        margin: 25px 0;
-        padding: 0 15px;
-    }
-    .container {
-        max-width: 1000px;
-        margin: auto;
-        padding: 0 15px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 18px;
-    }
-    .card {
-        color: var(--text-light);
-        padding: 22px;
-        border-radius: 16px;
-        text-align: center;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-        position: relative;
-        border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    /* ألوان بطاقات هادئة ومتناسقة */
-    .card:nth-child(1) { background: #4285F4; } /* فيسبوك - أزرق غوغل */
-    .card:nth-child(2) { background: linear-gradient(135deg, #FF9A8B 0%, #F6416C 100%); } /* إنستجرام - جرادينت وردي ناعم */
-    .card:nth-child(3) { background: #EA4335; } /* يوتيوب - أحمر هادئ */
-    .card:nth-child(4) { background: #1DA1F2; } /* تويتر - أزرق سماوي */
-    .card:nth-child(5) { background: #E60023; } /* بنترست - أحمر وردي */
-    .card:nth-child(6) { background: linear-gradient(135deg, #000000 0%, #434343 100%); } /* تيك توك - أسود أنيق */
-    .card:nth-child(7) { background: #2b475e; } /* ستيم - أزرق داكن */
-    
-    .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-    .card img {
-        width: 64px;
-        height: 64px;
-        object-fit: contain;
-        transition: all 0.3s ease;
-        filter: brightness(0.95) contrast(1.05);
-    }
-    .card:nth-child(1) img { filter: brightness(0.9) contrast(1.1); }
-    .card:nth-child(3) img { filter: brightness(0.92) contrast(1.08); }
-    .card img:hover {
-        transform: scale(1.12);
-    }
-    .card a {
-        color: var(--text-light);
-        font-size: 1.25em;
-        font-weight: 500;
-        text-decoration: none;
-        letter-spacing: 0.5px;
-    }
-    .checkbox {
-        width: 21px;
-        height: 21px;
-        accent-color: var(--success-color);
-        cursor: pointer;
-        position: relative;
-        z-index: 2;
-        margin-top: 5px;
-    }
-    .button-container {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        z-index: 100;
-    }
-    .theme-toggle, .open-selected {
-        background: var(--primary-color);
-        color: var(--text-light);
-        border: none;
-        padding: 11px 17px;
-        border-radius: 28px;
-        cursor: pointer;
-        font-size: 0.95em;
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    .theme-toggle:hover, .open-selected:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-    }
-    .open-selected {
-        background: var(--success-color);
-    }
-    
-    /* تحسينات الوضع الداكن */
-    body.dark-mode {
-        background-color: #0a0a0a;
-        color: #f0f0f0;
-    }
-    body.dark-mode .card {
-        opacity: 0.92;
-        filter: brightness(0.88);
-        border-color: rgba(255,255,255,0.1);
-    }
-    body.dark-mode .card:nth-child(1) { background: #3367D6; }
-    body.dark-mode .card:nth-child(2) { background: linear-gradient(135deg, #E88D7A 0%, #D6375F 100%); }
-    body.dark-mode .card:nth-child(3) { background: #D0392B; }
-    body.dark-mode .card:nth-child(4) { background: #1A8CD8; }
-    body.dark-mode .card:nth-child(5) { background: #CC001F; }
-    body.dark-mode .card:nth-child(6) { background: linear-gradient(135deg, #000000 0%, #2D2D2D 100%); }
-    body.dark-mode .card:nth-child(7) { background: #1F3A4D; }
-    
-    body.dark-mode .theme-toggle {
-        background-color: #5a5a5a;
-    }
-    body.dark-mode .open-selected {
-        background-color: #2E8B57;
-    }
-    
-    .card-link {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-    }
-</style>
-</head>
-<body>
+<!DOCTYPE html> 
+<html lang="ar" dir="rtl"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>حبيب للتسهيل 🤙</title> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+<style> 
+:root { 
+  --primary-color: #4285F4; /* أزرق هادئ */ 
+  --secondary-color: #EA4335; /* أحمر هادئ */ 
+  --dark-color: #121212; 
+  --light-color: #f8f9fa; 
+  --success-color: #34A853; /* أخضر هادئ */ 
+  --text-color: #2d3748; 
+  --text-light: #ffffff; 
+} 
 
-<div class="button-container">
-    <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-sun"></i><span id="theme-text">الوضع الداكن</span></button>
-    <button class="open-selected" onclick="openSelectedLinks()"><i class="fas fa-external-link-alt"></i><span>فتح المحدد</span></button>
-</div>
+body { 
+  margin: 0; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background-color: var(--light-color); 
+  color: var(--text-color); 
+  transition: all 0.3s ease; 
+  position: relative;
+  overflow-x: hidden;
+} 
 
-<div class="header">حبيب للتسهيل 🤙</div>
-
-<div class="container">
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
-        <a href="https://www.facebook.com/?locale=fr_FR" target="_blank">Facebook</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://www.facebook.com/?locale=fr_FR" target="_blank" class="card-link"></a>
-    </div>
-
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
-        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://www.instagram.com/" target="_blank" class="card-link"></a>
-    </div>
-
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-        <a href="https://www.youtube.com/" target="_blank">YouTube</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://www.youtube.com/" target="_blank" class="card-link"></a>
-    </div>
-
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X">
-        <a href="https://twitter.com/" target="_blank">X</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://twitter.com/" target="_blank" class="card-link"></a>
-    </div>
-
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2175/2175205.png" alt="Pinterest">
-        <a href="https://www.pinterest.com/" target="_blank">Pinterest</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://www.pinterest.com/" target="_blank" class="card-link"></a>
-    </div>
-
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-        <a href="https://www.tiktok.com/" target="_blank">TikTok</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://www.tiktok.com/" target="_blank" class="card-link"></a>
-    </div>
-
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/15466/15466225.png" alt="Steam">
-        <a href="https://store.steampowered.com/" target="_blank">Steam</a>
-        <input type="checkbox" class="checkbox">
-        <a href="https://store.steampowered.com/" target="_blank" class="card-link"></a>
-    </div>
-</div>
-
-<script>
-function toggleTheme(){
-    const body = document.body;
-    const icon = document.getElementById("theme-icon");
-    const text = document.getElementById("theme-text");
-    body.classList.toggle("dark-mode");
-    if(body.classList.contains("dark-mode")){
-        icon.classList.replace("fa-sun","fa-moon");
-        text.textContent = "الوضع الفاتح";
-    } else {
-        icon.classList.replace("fa-moon","fa-sun");
-        text.textContent = "الوضع الداكن";
-    }
-    localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light");
+/* البقع الدائرية الذائبة */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 228, 196, 0.4) 0%, transparent 30%),
+              radial-gradient(circle at 80% 20%, rgba(255, 218, 185, 0.3) 0%, transparent 25%),
+              radial-gradient(circle at 40% 70%, rgba(255, 239, 213, 0.35) 0%, transparent 35%),
+              radial-gradient(circle at 70% 80%, rgba(255, 228, 196, 0.3) 0%, transparent 40%),
+              radial-gradient(circle at 10% 50%, rgba(255, 248, 220, 0.4) 0%, transparent 20%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.7;
 }
 
-function initializeTheme(){
-    const theme = localStorage.getItem("theme");
-    const icon = document.getElementById("theme-icon");
-    const text = document.getElementById("theme-text");
-    if(theme === "dark"){
-        document.body.classList.add("dark-mode");
-        icon.classList.replace("fa-sun","fa-moon");
-        text.textContent = "الوضع الفاتح";
-    }
+body.dark-mode::before {
+  display: none;
 }
 
-function openSelectedLinks(){
-    const checked = document.querySelectorAll('.checkbox:checked');
-    if(checked.length === 0){
-        alert("الرجاء تحديد روابط لفتحها");
-    } else {
-        checked.forEach(box => {
-            const link = box.parentElement.querySelector('.card-link').href;
-            window.open(link, '_blank');
-        });
-    }
-}
+.header { 
+  text-align: center; 
+  font-size: 2.2em; 
+  font-weight: bold; 
+  color: var(--primary-color); 
+  margin: 25px 0; 
+  padding: 0 15px; 
+} 
 
-document.addEventListener('DOMContentLoaded', () => {
-    initializeTheme();
-    
-    document.querySelectorAll('.checkbox').forEach(cb => {
-        cb.addEventListener('click', e => {
-            e.stopPropagation();
-        });
-    });
-});
-</script>
+.container { 
+  max-width: 1000px; 
+  margin: auto; 
+  padding: 0 15px; 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+  gap: 18px; 
+} 
 
-</body>
+.card { 
+  color: var(--text-light); 
+  padding: 22px; 
+  border-radius: 16px; 
+  text-align: center; 
+  cursor: pointer; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 12px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
+  transition: all 0.3s ease; 
+  position: relative; 
+  border: 1px solid rgba(255,255,255,0.2); 
+} 
+
+/* ألوان بطاقات هادئة ومتناسقة */ 
+.card:nth-child(1) { background: #4285F4; } /* فيسبوك - أزرق غوغل */ 
+.card:nth-child(2) { background: linear-gradient(135deg, #FF9A8B 0%, #F6416C 100%); } /* إنستجرام - جرادينت وردي ناعم */ 
+.card:nth-child(3) { background: #EA4335; } /* يوتيوب - أحمر هادئ */ 
+.card:nth-child(4) { background: #1DA1F2; } /* تويتر - أزرق سماوي */ 
+.card:nth-child(5) { background: #E60023; } /* بنترست - أحمر وردي */ 
+.card:nth-child(6) { background: linear-gradient(135deg, #000000 0%, #434343 100%); } /* تيك توك - أسود أنيق */ 
+.card:nth-child(7) { background: #2b475e; } /* ستيم - أزرق داكن */ 
+
+.card:hover { 
+  transform: translateY(-6px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12); 
+} 
+
+.card img { 
+  width: 64px; 
+  height: 64px; 
+  object-fit: contain; 
+  transition: all 0.3s ease; 
+  filter: brightness(0.95) contrast(1.05); 
+} 
+
+.card:nth-child(1) img { filter: brightness(0.9) contrast(1.1); } 
+.card:nth-child(3) img { filter: brightness(0.92) contrast(1.08); } 
+
+.card img:hover { 
+  transform: scale(1.12); 
+} 
+
+.card a { 
+  color: var(--text-light); 
+  font-size: 1.25em; 
+  font-weight: 500; 
+  text-decoration: none; 
+  letter-spacing: 0.5px; 
+} 
+
+.checkbox { 
+  width: 21px; 
+  height: 21px; 
+  accent-color: var(--success-color); 
+  cursor: pointer; 
+  position: relative; 
+  z-index: 2; 
+  margin-top: 5px; 
+} 
+
+.button-container { 
+  position: fixed; 
+  top: 20px; 
+  left: 20px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  z-index: 100; 
+} 
+
+.theme-toggle, .open-selected { 
+  background: var(--primary-color); 
+  color: var(--text-light); 
+  border: none; 
+  padding: 11px 17px; 
+  border-radius: 28px; 
+  cursor: pointer; 
+  font-size: 0.95em; 
+  display: flex; 
+  align-items: center; 
+  gap: 9px; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+  transition: all 0.3s ease; 
+} 
+
+.theme-toggle:hover, .open-selected:hover { 
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15); 
+} 
+
+.open-selected { 
+  background: var(--success-color); 
+} 
+
+/* تحسينات الوضع الداكن */ 
+body.dark-mode { 
+  background-color: #0a0a0a; 
+  color: #f0f0f0; 
+} 
+
+body.dark-mode .card { 
+  opacity: 0.92; 
+  filter: brightness(0.88); 
+  border-color: rgba(255,255,255,0.1); 
+} 
+
+body.dark-mode .card:nth-child(1) { background: #3367D6; } 
+body.dark-mode .card:nth-child(2) { background: linear-gradient(135deg, #E88D7A 0%, #D6375F 100%); } 
+body.dark-mode .card:nth-child(3) { background: #D0392B; } 
+body.dark-mode .card:nth-child(4) { background: #1A8CD8; } 
+body.dark-mode .card:nth-child(5) { background: #CC001F; } 
+body.dark-mode .card:nth-child(6) { background: linear-gradient(135deg, #000000 0%, #2D2D2D 100%); } 
+body.dark-mode .card:nth-child(7) { background: #1F3A4D; } 
+
+body.dark-mode .theme-toggle { 
+  background-color: #5a5a5a; 
+} 
+
+body.dark-mode .open-selected { 
+  background-color: #2E8B57; 
+} 
+
+.card-link { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  z-index: 1; 
+} 
+</style> 
+</head> 
+<body> 
+<div class="button-container"> 
+  <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-sun"></i><span id="theme-text">الوضع الداكن</span></button> 
+  <button class="open-selected" onclick="openSelectedLinks()"><i class="fas fa-external-link-alt"></i><span>فتح المحدد</span></button> 
+</div> 
+<div class="header">حبيب للتسهيل 🤙</div> 
+<div class="container"> 
+  <div class="card"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"> 
+    <a href="https://www.facebook.com/?locale=fr_FR" target="_blank">Facebook</a> 
+    <input type="checkbox" class="checkbox"> 
+    <a href="https://www.facebook.com/?locale=fr_FR" target="_blank" class="card-link"></a> 
+  </div> 
+  <div class="card"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"> 
+    <a href="https://www.instagram.com/" target="_blank">Instagram</a> 
+    <input type="checkbox" class="checkbox"> 
+    <a href="https://www.instagram.com/" target="_blank" class="card-link"></a> 
+  </div> 
+  <div class="card"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"> 
+    <a href="https://www.youtube.com/" target="_blank">YouTube</a> 
+    <input type="checkbox" class="checkbox"> 
+    <a href="https://www.youtube.com/" target="_blank" class="card-link"></a> 
+  </div> 
+  <div class="card"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X"> 
+    <a href="https://twitter.com/" target="_blank">X</a> 
+    <input type="checkbox" class="checkbox"> 
+    <a href="https://twitter.com/" target="_blank" class="card-link"></a> 
+  </div> 
+  <div class="card"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/2175/2175205.png" alt="Pinterest"> 
+    <a href="https://www.pinterest.com/" target="_blank">Pinterest</a> 
+    <input type="checkbox" class="checkbox"> 
+    <a href="https://www.pinterest.com/" target="_blank" class="card-link"></a> 
+  </div> 
+  <div class="card"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"> 
+    <a href="https://www.tiktok.com/" target="_blank">TikTok</a> 
+    <input type="checkbox" class="checkbox"> 
+    <a href="https://www.tiktok.com/" target="_blank" class="card-link"></a> 
+  </div> 
+  <div class="card"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/15466/15466225.png" alt="Steam"> 
+    <a href="https://store.steampowered.com/" target="_blank">Steam</a> 
+    <input type="checkbox" class="checkbox"> 
+    <a href="https://store.steampowered.com/" target="_blank" class="card-link"></a> 
+  </div> 
+</div> 
+<script> 
+function toggleTheme(){ 
+  const body = document.body; 
+  const icon = document.getElementById("theme-icon"); 
+  const text = document.getElementById("theme-text"); 
+  body.classList.toggle("dark-mode"); 
+  if(body.classList.contains("dark-mode")){ 
+    icon.classList.replace("fa-sun","fa-moon"); 
+    text.textContent = "الوضع الفاتح"; 
+  } else { 
+    icon.classList.replace("fa-moon","fa-sun"); 
+    text.textContent = "الوضع الداكن"; 
+  } 
+  localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light"); 
+} 
+
+function initializeTheme(){ 
+  const theme = localStorage.getItem("theme"); 
+  const icon = document.getElementById("theme-icon"); 
+  const text = document.getElementById("theme-text"); 
+  if(theme === "dark"){ 
+    document.body.classList.add("dark-mode"); 
+    icon.classList.replace("fa-sun","fa-moon"); 
+    text.textContent = "الوضع الفاتح"; 
+  } 
+} 
+
+function openSelectedLinks(){ 
+  const checked = document.querySelectorAll('.checkbox:checked'); 
+  if(checked.length === 0){ 
+    alert("الرجاء تحديد روابط لفتحها"); 
+  } else { 
+    checked.forEach(box => { 
+      const link = box.parentElement.querySelector('.card-link').href; 
+      window.open(link, '_blank'); 
+    }); 
+  } 
+} 
+
+document.addEventListener('DOMContentLoaded', () => { 
+  initializeTheme(); 
+  document.querySelectorAll('.checkbox').forEach(cb => { 
+    cb.addEventListener('click', e => { 
+      e.stopPropagation(); 
+    }); 
+  }); 
+}); 
+</script> 
+</body> 
 </html>
